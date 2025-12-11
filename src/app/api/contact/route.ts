@@ -8,6 +8,7 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData();
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;
+    const phone = formData.get('phone') as string;
     const subject = formData.get('subject') as string;
     const message = formData.get('message') as string;
     const fileEntries = formData.getAll('files') as File[];
@@ -78,6 +79,7 @@ export async function POST(request: NextRequest) {
           <div style="background-color: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <p style="margin: 10px 0;"><strong>Name:</strong> ${name}</p>
             <p style="margin: 10px 0;"><strong>Email:</strong> ${email}</p>
+            ${phone ? `<p style="margin: 10px 0;"><strong>Phone:</strong> ${phone}</p>` : ''}
             <p style="margin: 10px 0;"><strong>Subject:</strong> ${subject}</p>
           </div>
           <div style="margin: 20px 0;">
