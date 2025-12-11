@@ -12,6 +12,7 @@ export default function ContactForm() {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
+        phone: "",
         subject: "",
         message: ""
     });
@@ -27,6 +28,7 @@ export default function ContactForm() {
             const formDataToSend = new FormData();
             formDataToSend.append('name', formData.name);
             formDataToSend.append('email', formData.email);
+            formDataToSend.append('phone', formData.phone);
             formDataToSend.append('subject', formData.subject);
             formDataToSend.append('message', formData.message);
 
@@ -54,6 +56,7 @@ export default function ContactForm() {
             setFormData({
                 name: "",
                 email: "",
+                phone: "",
                 subject: "",
                 message: ""
             });
@@ -193,6 +196,28 @@ export default function ContactForm() {
                 </div>
                 <div className="space-y-2">
                     <label
+                        htmlFor="phone"
+                        className="text-sm font-medium"
+                        style={{ color: colors.text.primary }}
+                    >
+                        Phone Number
+                    </label>
+                    <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        placeholder="+1 (555) 123-4567"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        style={{
+                            backgroundColor: colors.background.tertiary,
+                            borderColor: colors.border.default,
+                            color: colors.text.primary
+                        }}
+                    />
+                </div>
+                <div className="space-y-2">
+                    <label
                         htmlFor="subject"
                         className="text-sm font-medium"
                         style={{ color: colors.text.primary }}
@@ -224,7 +249,7 @@ export default function ContactForm() {
                     <Textarea
                         id="message"
                         name="message"
-                        placeholder="Lorem ipsum dolor sit amet consectetur..."
+                        placeholder="Type your message here in English..."
                         value={formData.message}
                         onChange={handleChange}
                         required

@@ -9,7 +9,7 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { Menu, MoveRight, X } from "lucide-react";
+import { Menu, MoveRight, X, Send } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -115,6 +115,9 @@ export const Navbar = () => {
                     </Button>
                     <div className="border-r hidden md:inline"></div>
                     <Button variant="outline" className="hidden md:inline" onClick={() => router.push(`/contact`)}>Contact Us</Button>
+                    <Button variant="ghost" size="icon" className="hidden md:flex md:justify-center pr-0.5" onClick={() => window.open('https://t.me/built', '_blank')}>
+                        <Send className="h-4 w-4" />
+                    </Button>
                 </div>
                 <div className="flex w-12 shrink lg:hidden items-end justify-end">
                     <Button variant="ghost" size="sm" onClick={() => setOpen(!isOpen)}>
@@ -194,6 +197,16 @@ export const Navbar = () => {
                                         <span className="text-lg">Contact Us</span>
                                         <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
                                     </Link>
+                                    <a
+                                        href="https://t.me/built"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex justify-between items-center hover:text-primary transition-colors hover:pointer-events-auto"
+                                        onClick={() => setOpen(false)}
+                                    >
+                                        <span className="text-lg">Telegram</span>
+                                        <Send className="w-4 h-4 stroke-1 text-muted-foreground" />
+                                    </a>
                                 </motion.div>
                             </motion.div>
                         )}
