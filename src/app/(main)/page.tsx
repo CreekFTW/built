@@ -4,6 +4,7 @@ import FAQ from "../../components/dom/faqs";
 import Solutions from "../../components/dom/solutions";
 import Features from "../../components/dom/features";
 import Testimonials from "../../components/dom/testimonials";
+import ProjectsPreview from "../../components/dom/projects-preview";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -42,6 +43,7 @@ export default function Home() {
             <Hero />
             <Solutions />
             <Features />
+            <ProjectsPreview />
             <Testimonials />
             <CTA />
             <FAQ />
