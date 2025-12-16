@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { colors } from "@/theme/colors";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 
@@ -76,7 +76,8 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                 y,
                 transformPerspective: 1000
             }}
-            className="mb-32 last:mb-0"
+            className="mb-32 last:mb-0 cursor-pointer"
+            onClick={() => window.open('https://t.me/built', '_blank')}
         >
             <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center ${!isEven ? 'lg:grid-flow-dense' : ''}`}>
                 {/* Video Section */}
@@ -298,43 +299,25 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                         transition={{ duration: 0.6, delay: 0.8 }}
                         viewport={{ once: false, amount: 0.8 }}
                     >
-                        {project.liveUrl && (
-                            <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <Button
+                                className="gap-2"
+                                style={{
+                                    backgroundColor: colors.primary,
+                                    color: colors.text.primary
+                                }}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    window.open('https://t.me/built', '_blank');
+                                }}
                             >
-                                <Button
-                                    className="gap-2"
-                                    style={{
-                                        backgroundColor: colors.primary,
-                                        color: colors.text.primary
-                                    }}
-                                    onClick={() => window.open(project.liveUrl, '_blank')}
-                                >
-                                    View Live
-                                    <ExternalLink className="h-4 w-4" />
-                                </Button>
-                            </motion.div>
-                        )}
-                        {project.githubUrl && (
-                            <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <Button
-                                    variant="outline"
-                                    className="gap-2"
-                                    style={{
-                                        borderColor: colors.border?.default || 'rgba(255,255,255,0.1)',
-                                        color: colors.text.secondary
-                                    }}
-                                    onClick={() => window.open(project.githubUrl, '_blank')}
-                                >
-                                    <Github className="h-4 w-4" />
-                                    Code
-                                </Button>
-                            </motion.div>
-                        )}
+                                Discuss Project
+                                <MessageCircle className="h-4 w-4" />
+                            </Button>
+                        </motion.div>
                     </motion.div>
                 </motion.div>
             </div>
