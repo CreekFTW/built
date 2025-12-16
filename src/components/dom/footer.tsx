@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Linkedin } from "lucide-react";
 
 export const Footer = () => {
     const navigationItems = [
@@ -80,6 +81,17 @@ export const Footer = () => {
                                 <Link href="/terms">Terms of service</Link>
                                 <Link href="/privacy">Privacy Policy</Link>
                             </div>
+                        </div>
+                        <div className="flex gap-4 items-center">
+                            <Link 
+                                href="https://www.linkedin.com/company/built-tech/" 
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 text-background/75 hover:text-background transition-colors"
+                            >
+                                <Linkedin className="h-5 w-5" />
+                                <span className="text-sm sm:text-base">Follow us on LinkedIn</span>
+                            </Link>
                         </div>
                     </div>
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-start">
