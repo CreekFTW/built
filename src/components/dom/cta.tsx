@@ -120,7 +120,7 @@ const CTA = () => {
                                         backgroundColor: colors.primary,
                                         color: colors.text.primary
                                     }}
-                                    onClick={() => router.push("/contact")}
+                                    onClick={() => router.push("/contact#contact-form")}
                                 >
                                     <MessageSquare className="h-5 w-5" />
                                     Get in Touch
