@@ -10,7 +10,7 @@ export default function ContactClient() {
         {
             icon: Mail,
             title: "Email",
-            detail: "jachai@betterbrandmarketing.io",
+            detail: "hello@builtwithtech.io",
             description: "Get in touch anytime"
         },
         {
