@@ -27,7 +27,7 @@ const projects: Project[] = [
         description: "Intelligent phone agent powered by advanced AI that handles customer inquiries, schedules appointments, and processes orders with natural conversation flow. Reduced support costs by 70%.",
         videoUrl: "/videos/ai-caller.mp4",
         tags: ["AI", "Voice AI", "Python", "React"],
-        liveUrl: "https://example.com",
+        liveUrl: "https://t.me/built",
         stats: [
             { label: "Calls Handled", value: "100K+" },
             { label: "Cost Savings", value: "70%" },
@@ -40,12 +40,25 @@ const projects: Project[] = [
         description: "Advanced web scraping system that automatically extracts car listings from multiple sources, normalizes data, and provides real-time market insights. Built for scalability and accuracy.",
         videoUrl: "/videos/car-scrapper.mp4",
         tags: ["Python", "Web Scraping", "Data Processing", "API"],
-        liveUrl: "https://example.com",
-        githubUrl: "https://github.com/example",
+        liveUrl: "https://t.me/built",
+        githubUrl: "https://t.me/built",
         stats: [
             { label: "Listings Scraped", value: "500K+" },
             { label: "Accuracy", value: "99.5%" },
             { label: "Sources", value: "25+" }
+        ]
+    },
+    {
+        id: 3,
+        title: "Team & Employee Management Software",
+        description: "Comprehensive workforce management platform featuring employee scheduling, time tracking, performance analytics, and team collaboration tools. Streamlines HR operations and boosts team productivity.",
+        videoUrl: "/videos/tasttyy-crm.mp4",
+        tags: ["React", "Node.js", "TypeScript", "CRM"],
+        liveUrl: "https://t.me/built",
+        stats: [
+            { label: "Active Users", value: "10K+" },
+            { label: "Efficiency Gain", value: "45%" },
+            { label: "Satisfaction", value: "4.9/5" }
         ]
     }
 ];
