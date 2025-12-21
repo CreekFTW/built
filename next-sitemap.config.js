@@ -1,5 +1,5 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://built-phi.vercel.app",
+  siteUrl: "https://www.builtwithtech.io",
   sitemapSize: 7000,
 };
