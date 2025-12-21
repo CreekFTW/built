@@ -6,6 +6,7 @@ import { colors } from "@/theme/colors";
 import { useRouter } from "next/navigation";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { useAnalytics } from "@/lib/analytics";
 
 const AnimatedCounter = ({ value, suffix = "" }: { value: number, suffix?: string }) => {
     const ref = useRef<HTMLDivElement>(null);
@@ -33,7 +34,18 @@ const AnimatedCounter = ({ value, suffix = "" }: { value: number, suffix?: strin
 };
 
 const CTA = () => {
-    const router = useRouter()
+    const router = useRouter();
+    const { events } = useAnalytics();
+
+    const handleGetInTouch = () => {
+        events.ctaClick('Get in Touch', 'cta_section', '/contact');
+        router.push("/contact");
+    };
+
+    const handleLearnMore = () => {
+        events.ctaClick('Learn More', 'cta_section', '/about');
+        router.push("/about");
+    };
 
     return (
         <section className="w-full py-12 sm:py-16 md:py-20 lg:py-40">
@@ -120,7 +132,7 @@ const CTA = () => {
                                         backgroundColor: colors.primary,
                                         color: colors.text.primary
                                     }}
-                                    onClick={() => router.push("/contact")}
+                                    onClick={handleGetInTouch}
                                 >
                                     <MessageSquare className="h-5 w-5" />
                                     Get in Touch
@@ -135,7 +147,7 @@ const CTA = () => {
                                         color: colors.text.primary,
                                         backgroundColor: `${colors.background.primary}60`
                                     }}
-                                    onClick={() => router.push("/about")}
+                                    onClick={handleLearnMore}
                                 >
                                     Learn More
                                 </Button>

@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Send, Paperclip, X } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useAnalytics } from "@/lib/analytics";
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({
@@ -18,6 +19,7 @@ export default function ContactForm() {
     });
     const [files, setFiles] = useState<File[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const { events } = useAnalytics();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -48,6 +50,10 @@ export default function ContactForm() {
                 throw new Error(data.error || 'Failed to send message');
             }
 
+            // Track successful form submission
+            events.formSubmit('contact_form', true);
+            events.contactConversion();
+
             toast.success('Message sent successfully!', {
                 description: 'Thank you for contacting us. We will get back to you soon.',
             });
@@ -62,6 +68,10 @@ export default function ContactForm() {
             });
             setFiles([]);
         } catch (error) {
+            // Track form submission error
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            events.formError('contact_form', errorMessage);
+
             toast.error('Failed to send message', {
                 description: error instanceof Error ? error.message : 'Please try again later.',
             });
@@ -124,6 +134,11 @@ export default function ContactForm() {
 
         // Success - add files
         setFiles([...files, ...selectedFiles]);
+
+        // Track file uploads
+        selectedFiles.forEach((file) => {
+            events.fileUpload(file.name, file.type, file.size);
+        });
 
         // Show success toast
         const fileCount = selectedFiles.length;

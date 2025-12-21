@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+ANALYTICS-QUICK-START.md
+GA4-INTEGRATION-GUIDE.md
+
 # dependencies
 /node_modules
 /.pnp
