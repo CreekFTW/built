@@ -63,7 +63,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning className="dark">
-            <head>
+            <body
+                className={`${plusJakarta.variable} ${firaCode.variable} font-sans antialiased dark`}
+                suppressHydrationWarning
+            >
                 {/* Google Analytics 4 - Only loads in production */}
                 {GA_MEASUREMENT_ID && process.env.NODE_ENV === 'production' && (
                     <>
@@ -88,11 +91,6 @@ export default function RootLayout({
                         />
                     </>
                 )}
-            </head>
-            <body
-                className={`${plusJakarta.variable} ${firaCode.variable} font-sans antialiased dark`}
-                suppressHydrationWarning
-            >
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="dark"
