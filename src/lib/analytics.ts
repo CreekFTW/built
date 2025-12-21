@@ -74,10 +74,6 @@ export const trackEvent = (eventName: string, params?: EventParams): void => {
     return;
   }
 
-  console.log('[Analytics - Production] Sending event:', eventName, params);
-  console.log('[Analytics - Production] gtag type:', typeof window.gtag);
-  console.log('[Analytics - Production] GA_MEASUREMENT_ID:', GA_MEASUREMENT_ID);
-
   window.gtag('event', eventName, params);
 };
 

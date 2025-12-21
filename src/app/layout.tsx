@@ -2,6 +2,7 @@ import Script from "next/script";
 import { Toaster } from "sonner";
 import { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
+import { AnalyticsPageview } from "@/components/analytics-pageview";
 import { GA_MEASUREMENT_ID } from "@/lib/analytics";
 import { Plus_Jakarta_Sans, Fira_Code } from "next/font/google";
 
@@ -98,6 +99,7 @@ export default function RootLayout({
                     enableSystem={false}
                     disableTransitionOnChange
                 >
+                    <AnalyticsPageview />
                     {children}
                     <Toaster />
                 </ThemeProvider>
