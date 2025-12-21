@@ -10,7 +10,7 @@ export default function ContactClient() {
         {
             icon: Mail,
             title: "Email",
-            detail: "jachai@betterbrandmarketing.io",
+            detail: "hello@builtwithtech.io",
             description: "Get in touch anytime"
         },
         {
@@ -90,71 +90,10 @@ export default function ContactClient() {
                 </div>
             </section>
 
-            {/* Contact Info Cards */}
-            <section
-                className="w-full py-16 lg:py-24"
-                style={{ backgroundColor: colors.background.secondary }}
-            >
-                <div className="container mx-auto px-4 md:px-6">
-                    <motion.div
-                        className="grid gap-8 md:grid-cols-3"
-                        variants={containerVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, margin: "-100px" }}
-                    >
-                        {contactInfo.map((info, index) => (
-                            <motion.div
-                                key={index}
-                                className="flex flex-col items-center text-center space-y-4 p-6 rounded-xl"
-                                style={{
-                                    backgroundColor: colors.background.tertiary,
-                                    borderColor: colors.border.default,
-                                    borderWidth: '1px'
-                                }}
-                                variants={itemVariants}
-                                transition={{ duration: 0.5 }}
-                                whileHover={{ y: -5, scale: 1.02 }}
-                            >
-                                <motion.div
-                                    className="p-3 rounded-lg"
-                                    style={{ backgroundColor: `${colors.primary}1A` }}
-                                    whileHover={{ scale: 1.1, rotate: 5 }}
-                                    transition={{ duration: 0.2 }}
-                                >
-                                    <info.icon
-                                        className="h-6 w-6"
-                                        style={{ color: colors.primary }}
-                                    />
-                                </motion.div>
-                                <div className="space-y-1">
-                                    <h3
-                                        className="text-xl font-semibold"
-                                        style={{ color: colors.text.primary }}
-                                    >
-                                        {info.title}
-                                    </h3>
-                                    <p
-                                        className="text-lg font-medium"
-                                        style={{ color: colors.primary }}
-                                    >
-                                        {info.detail}
-                                    </p>
-                                    <p
-                                        className="text-sm"
-                                        style={{ color: colors.text.secondary }}
-                                    >
-                                        {info.description}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
+
 
             {/* Contact Form Section */}
-            <section className="w-full py-16 lg:py-24">
+            <section id="contact-form" className="w-full py-16 lg:py-24">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
                         {/* Left Column - Info */}
@@ -228,6 +167,69 @@ export default function ContactClient() {
                             <ContactForm />
                         </motion.div>
                     </div>
+                </div>
+            </section>
+
+            {/* Contact Info Cards */}
+            <section
+                className="w-full py-16 lg:py-24"
+                style={{ backgroundColor: colors.background.secondary }}
+            >
+                <div className="container mx-auto px-4 md:px-6">
+                    <motion.div
+                        className="grid gap-8 md:grid-cols-3"
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                    >
+                        {contactInfo.map((info, index) => (
+                            <motion.div
+                                key={index}
+                                className="flex flex-col items-center text-center space-y-4 p-6 rounded-xl"
+                                style={{
+                                    backgroundColor: colors.background.tertiary,
+                                    borderColor: colors.border.default,
+                                    borderWidth: '1px'
+                                }}
+                                variants={itemVariants}
+                                transition={{ duration: 0.5 }}
+                                whileHover={{ y: -5, scale: 1.02 }}
+                            >
+                                <motion.div
+                                    className="p-3 rounded-lg"
+                                    style={{ backgroundColor: `${colors.primary}1A` }}
+                                    whileHover={{ scale: 1.1, rotate: 5 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <info.icon
+                                        className="h-6 w-6"
+                                        style={{ color: colors.primary }}
+                                    />
+                                </motion.div>
+                                <div className="space-y-1">
+                                    <h3
+                                        className="text-xl font-semibold"
+                                        style={{ color: colors.text.primary }}
+                                    >
+                                        {info.title}
+                                    </h3>
+                                    <p
+                                        className="text-lg font-medium"
+                                        style={{ color: colors.primary }}
+                                    >
+                                        {info.detail}
+                                    </p>
+                                    <p
+                                        className="text-sm"
+                                        style={{ color: colors.text.secondary }}
+                                    >
+                                        {info.description}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
                 </div>
             </section>
         </div>

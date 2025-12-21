@@ -92,7 +92,7 @@ const Hero = () => {
                                 backgroundColor: colors.primary,
                                 color: colors.text.primary
                             }}
-                            onClick={() => router.push("/contact")}
+                            onClick={() => router.push("/contact#contact-form")}
                         >
                             Get Started
                             <ArrowRight className="h-4 w-4" />

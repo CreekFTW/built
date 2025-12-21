@@ -84,7 +84,7 @@ export const Navbar = () => {
                                                                 {item.description}
                                                             </p>
                                                         </div>
-                                                        <Button size="sm" className="mt-10" onClick={() => router.push("https://app.salkaro.com/sign-up")}>
+                                                        <Button size="sm" className="mt-10" onClick={() => router.push("/contact#contact-form")}>
                                                             Get started
                                                         </Button>
                                                     </div>
