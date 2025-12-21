@@ -5,15 +5,20 @@
  * Analytics are disabled in development mode for privacy and accurate metrics.
  */
 
+// GA4 Config types
+type GtagConfigValue = string | number | boolean | null | undefined;
+type GtagConfigObject = Record<string, GtagConfigValue>;
+type GtagConfig = Record<string, GtagConfigValue | GtagConfigValue[] | GtagConfigObject>;
+
 // Extend the Window interface to include gtag
 declare global {
   interface Window {
     gtag: (
       command: 'config' | 'event' | 'js' | 'set',
       targetId: string,
-      config?: Record<string, any>
+      config?: GtagConfig
     ) => void;
-    dataLayer: any[];
+    dataLayer: Array<unknown>;
   }
 }
 
@@ -53,10 +58,9 @@ export const pageview = (url: string): void => {
 
 /**
  * Event parameters interface for type safety
+ * Uses the same type structure as GtagConfig for compatibility
  */
-interface EventParams {
-  [key: string]: any;
-}
+type EventParams = GtagConfig;
 
 /**
  * Track custom events
