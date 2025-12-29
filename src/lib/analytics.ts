@@ -149,6 +149,15 @@ export const events = {
       conversion_type: 'contact_form',
     });
   },
+
+  // Calendly Events
+  calendlyEventScheduled: (eventName?: string, eventUri?: string) => {
+    trackEvent('calendly_event_scheduled', {
+      event_name: eventName || 'unknown',
+      event_uri: eventUri || 'unknown',
+      conversion_type: 'calendly_booking',
+    });
+  },
 };
 
 /**

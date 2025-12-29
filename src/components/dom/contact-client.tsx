@@ -2,8 +2,9 @@
 
 import { colors } from "@/theme/colors";
 import ContactForm from "./contact-form";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function ContactClient() {
     const contactInfo = [
@@ -86,6 +87,27 @@ export default function ContactClient() {
                         >
                             Ready to streamline your business with custom software and AI automations? Tell us about your project and we&apos;ll help you build systems that scale.
                         </motion.p>
+                        <motion.div
+                            className="flex flex-col sm:flex-row gap-4 justify-center mt-4"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                        >
+                            <Link href="/setup-meeting">
+                                <motion.button
+                                    className="px-6 py-3 rounded-lg font-medium flex items-center gap-2 justify-center"
+                                    style={{
+                                        backgroundColor: colors.primary,
+                                        color: 'white'
+                                    }}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <Calendar className="h-5 w-5" />
+                                    Book a Call
+                                </motion.button>
+                            </Link>
+                        </motion.div>
                     </motion.div>
                 </div>
             </section>

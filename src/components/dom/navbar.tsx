@@ -55,11 +55,11 @@ export const Navbar = () => {
     const [isOpen, setOpen] = useState(false);
     return (
         <header className="w-full z-40 fixed top-0 left-0 bg-background border-b border-border">
-            <div className="container relative mx-auto min-h-16 sm:min-h-20 flex gap-4 flex-row lg:grid lg:grid-cols-3 items-center px-4 sm:px-6 md:px-10 2xl:px-0">
-                <div className="flex lg:justify-center">
+            <div className="container relative mx-auto min-h-16 sm:min-h-20 flex gap-4 flex-row xl:grid xl:grid-cols-3 items-center px-4 sm:px-6 md:px-10 2xl:px-0">
+                <div className="flex xl:justify-center">
                     <Link href="/" className="font-semibold text-lg sm:text-base">Built</Link>
                 </div>
-                <div className="justify-start items-center gap-4 lg:flex hidden flex-row">
+                <div className="justify-start items-center gap-4 xl:flex hidden flex-row">
                     <NavigationMenu className="flex justify-start items-start">
                         <NavigationMenuList className="flex justify-start gap-4 flex-row">
                             {navigationItems.map((item) => (
@@ -76,7 +76,7 @@ export const Navbar = () => {
                                                 {item.title}
                                             </NavigationMenuTrigger>
                                             <NavigationMenuContent className="w-[450px]! p-4">
-                                                <div className="flex flex-col lg:grid grid-cols-2 gap-4">
+                                                <div className="flex flex-col xl:grid grid-cols-2 gap-4">
                                                     <div className="flex flex-col h-full justify-between">
                                                         <div className="flex flex-col">
                                                             <p className="text-base">{item.title}</p>
@@ -110,16 +110,16 @@ export const Navbar = () => {
                     </NavigationMenu>
                 </div>
                 <div className="flex justify-end w-full gap-4">
-                    <Button variant="ghost" className="hidden md:inline" onClick={() => router.push(`/about`)}>
+                    <Button variant="ghost" className="hidden xl:inline" onClick={() => router.push(`/about`)}>
                         About Us
                     </Button>
-                    <div className="border-r hidden md:inline"></div>
-                    <Button variant="outline" className="hidden md:inline" onClick={() => router.push(`/contact`)}>Contact Us</Button>
-                    <Button variant="ghost" size="icon" className="hidden md:flex md:justify-center pr-0.5" onClick={() => window.open('https://t.me/built', '_blank')}>
+                    <div className="border-r hidden xl:inline"></div>
+                    <Button variant="outline" className="hidden xl:inline" onClick={() => router.push(`/contact`)}>Contact Us</Button>
+                    <Button variant="ghost" size="icon" className="hidden xl:flex xl:justify-center pr-0.5" onClick={() => window.open('https://t.me/built', '_blank')}>
                         <Send className="h-4 w-4" />
                     </Button>
                 </div>
-                <div className="flex w-12 shrink lg:hidden items-end justify-end">
+                <div className="flex w-12 shrink xl:hidden items-end justify-end">
                     <Button variant="ghost" size="sm" onClick={() => setOpen(!isOpen)}>
                         {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                     </Button>
