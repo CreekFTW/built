@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Zap, Clock, TrendingUp, CheckCircle } from "lucide-react";
+import { ArrowRight, Zap, Clock, TrendingUp, CheckCircle, Calendar } from "lucide-react";
 import { colors } from "@/theme/colors";
 import { useRouter } from "next/navigation";
 import ShootingStarsBackground from "@/components/dom/shooting-stars-background";
@@ -91,6 +91,20 @@ const Hero = () => {
                             style={{
                                 backgroundColor: colors.primary,
                                 color: colors.text.primary
+                            }}
+                            onClick={() => router.push("/setup-meeting")}
+                        >
+                            <Calendar className="h-4 w-4" />
+                            Book a Call
+                        </Button>
+                        <Button
+                            size="lg"
+                            variant="outline"
+                            className="gap-2"
+                            style={{
+                                borderColor: colors.border.emphasis,
+                                color: colors.text.primary,
+                                backgroundColor: `${colors.background.primary}60`
                             }}
                             onClick={() => router.push("/contact#contact-form")}
                         >

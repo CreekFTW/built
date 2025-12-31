@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MessageSquare, Sparkles } from "lucide-react";
+import { ArrowRight, MessageSquare, Sparkles, Calendar } from "lucide-react";
 import { colors } from "@/theme/colors";
 import { useRouter } from "next/navigation";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
@@ -36,6 +36,11 @@ const AnimatedCounter = ({ value, suffix = "" }: { value: number, suffix?: strin
 const CTA = () => {
     const router = useRouter();
     const { events } = useAnalytics();
+
+    const handleBookCall = () => {
+        events.ctaClick('Book a Call', 'cta_section', '/setup-meeting');
+        router.push("/setup-meeting");
+    };
 
     const handleGetInTouch = () => {
         events.ctaClick('Get in Touch', 'cta_section', '/contact');
@@ -132,11 +137,10 @@ const CTA = () => {
                                         backgroundColor: colors.primary,
                                         color: colors.text.primary
                                     }}
-                                    onClick={handleGetInTouch}
+                                    onClick={handleBookCall}
                                 >
-                                    <MessageSquare className="h-5 w-5" />
-                                    Get in Touch
-                                    <ArrowRight className="h-4 w-4" />
+                                    <Calendar className="h-5 w-5" />
+                                    Book a Call
                                 </Button>
                                 <Button
                                     size="lg"
@@ -147,9 +151,11 @@ const CTA = () => {
                                         color: colors.text.primary,
                                         backgroundColor: `${colors.background.primary}60`
                                     }}
-                                    onClick={handleLearnMore}
+                                    onClick={handleGetInTouch}
                                 >
-                                    Learn More
+                                    <MessageSquare className="h-5 w-5" />
+                                    Get in Touch
+                                    <ArrowRight className="h-4 w-4" />
                                 </Button>
                             </motion.div>
 
