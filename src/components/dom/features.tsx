@@ -3,32 +3,35 @@
 import { CheckCircle2, Zap, Shield, TrendingUp } from "lucide-react";
 import { colors } from "@/theme/colors";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/components/language-provider";
 
 const Features = () => {
+    const { t } = useLanguage();
+
     const benefits = [
         {
             icon: Zap,
-            title: "Lightning Fast Delivery",
-            description: "Launch in weeks, not months. We build iteratively so you see progress fast and get to market quickly.",
-            highlight: "2-4 week sprints"
+            title: t.features.items.fastDelivery.title,
+            description: t.features.items.fastDelivery.description,
+            highlight: t.features.items.fastDelivery.highlight
         },
         {
             icon: Shield,
-            title: "Built to Last",
-            description: "Enterprise-grade code, security best practices, and scalable architecture. No technical debt or messy shortcuts.",
-            highlight: "Production-ready"
+            title: t.features.items.builtToLast.title,
+            description: t.features.items.builtToLast.description,
+            highlight: t.features.items.builtToLast.highlight
         },
         {
             icon: TrendingUp,
-            title: "Drive Real Revenue",
-            description: "Systems designed around your business goals. Every feature maps to growth, efficiency, or customer satisfaction.",
-            highlight: "ROI-focused"
+            title: t.features.items.driveRevenue.title,
+            description: t.features.items.driveRevenue.description,
+            highlight: t.features.items.driveRevenue.highlight
         },
         {
             icon: CheckCircle2,
-            title: "Full Ownership",
-            description: "You own 100% of the code, infrastructure, and data. No vendor lock-in, no recurring platform fees.",
-            highlight: "Your assets"
+            title: t.features.items.fullOwnership.title,
+            description: t.features.items.fullOwnership.description,
+            highlight: t.features.items.fullOwnership.highlight
         }
     ];
 
@@ -79,19 +82,19 @@ const Features = () => {
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.4 }}
                             >
-                                Why Built?
+                                {t.features.badge}
                             </motion.div>
                             <h2
                                 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl lg:text-5xl"
                                 style={{ color: colors.text.primary }}
                             >
-                                Tech That Works For Your Business
+                                {t.features.title}
                             </h2>
                             <p
                                 className="text-base sm:text-lg md:text-xl max-w-[600px]"
                                 style={{ color: colors.text.secondary }}
                             >
-                                We&apos;re not a dev shop that churns out code. We&apos;re your technical partner — building systems that solve real problems and grow with you.
+                                {t.features.description}
                             </p>
                         </div>
                     </motion.div>

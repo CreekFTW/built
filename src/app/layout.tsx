@@ -2,6 +2,7 @@ import Script from "next/script";
 import { Toaster } from "sonner";
 import { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/components/language-provider";
 import { AnalyticsPageview } from "@/components/analytics-pageview";
 import { GA_MEASUREMENT_ID } from "@/lib/analytics";
 import { Plus_Jakarta_Sans, Fira_Code } from "next/font/google";
@@ -62,6 +63,7 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const test = ""
     return (
         <html lang="en" suppressHydrationWarning className="dark">
             <body
@@ -92,6 +94,25 @@ export default function RootLayout({
                         />
                     </>
                 )}
+
+                {/* Apollo Tracking Script - Only loads in production */}
+                {process.env.NODE_ENV === 'production' && (
+                    <Script
+                        id="apollo-tracking"
+                        strategy="afterInteractive"
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                                function initApollo(){
+                                    var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+                                    o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+                                    o.onload=function(){window.trackingFunctions.onLoad({appId:"6955cd98f7cf000011a2e378"})},
+                                    document.head.appendChild(o)
+                                }
+                                initApollo();
+                            `,
+                        }}
+                    />
+                )}
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="dark"
@@ -99,9 +120,11 @@ export default function RootLayout({
                     enableSystem={false}
                     disableTransitionOnChange
                 >
-                    <AnalyticsPageview />
-                    {children}
-                    <Toaster />
+                    <LanguageProvider>
+                        <AnalyticsPageview />
+                        {children}
+                        <Toaster />
+                    </LanguageProvider>
                 </ThemeProvider>
             </body>
         </html>

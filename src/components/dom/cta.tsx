@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useAnalytics } from "@/lib/analytics";
+import { useLanguage } from "@/components/language-provider";
 
 const AnimatedCounter = ({ value, suffix = "" }: { value: number, suffix?: string }) => {
     const ref = useRef<HTMLDivElement>(null);
@@ -36,6 +37,7 @@ const AnimatedCounter = ({ value, suffix = "" }: { value: number, suffix?: strin
 const CTA = () => {
     const router = useRouter();
     const { events } = useAnalytics();
+    const { t } = useLanguage();
 
     const handleBookCall = () => {
         events.ctaClick('Book a Call', 'cta_section', '/setup-meeting');
@@ -112,13 +114,13 @@ const CTA = () => {
                                     className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl lg:text-5xl"
                                     style={{ color: colors.text.primary }}
                                 >
-                                    Ready to Scale Your Business?
+                                    {t.cta.title}
                                 </h2>
                                 <p
                                     className="text-base sm:text-lg md:text-xl max-w-2xl px-4"
                                     style={{ color: colors.text.secondary }}
                                 >
-                                    Let&apos;s build custom software and AI automations that drive revenue, eliminate manual work, and give you systems that scale. Start your project today.
+                                    {t.cta.description}
                                 </p>
                             </motion.div>
 
@@ -140,7 +142,7 @@ const CTA = () => {
                                     onClick={handleBookCall}
                                 >
                                     <Calendar className="h-5 w-5" />
-                                    Book a Call
+                                    {t.common.bookACall}
                                 </Button>
                                 <Button
                                     size="lg"
@@ -154,7 +156,7 @@ const CTA = () => {
                                     onClick={handleGetInTouch}
                                 >
                                     <MessageSquare className="h-5 w-5" />
-                                    Get in Touch
+                                    {t.common.getInTouch}
                                     <ArrowRight className="h-4 w-4" />
                                 </Button>
                             </motion.div>
@@ -179,7 +181,7 @@ const CTA = () => {
                                         className="text-xs sm:text-sm text-center"
                                         style={{ color: colors.text.tertiary }}
                                     >
-                                        Solutions Built
+                                        {t.cta.stats.solutionsBuilt}
                                     </div>
                                 </div>
                                 <div className="flex flex-col items-center">
@@ -193,7 +195,7 @@ const CTA = () => {
                                         className="text-xs sm:text-sm text-center"
                                         style={{ color: colors.text.tertiary }}
                                     >
-                                        Businesses Automated
+                                        {t.cta.stats.businessesAutomated}
                                     </div>
                                 </div>
                                 <div className="flex flex-col items-center">
@@ -207,7 +209,7 @@ const CTA = () => {
                                         className="text-xs sm:text-sm text-center"
                                         style={{ color: colors.text.tertiary }}
                                     >
-                                        Support Available
+                                        {t.cta.stats.supportAvailable}
                                     </div>
                                 </div>
                             </motion.div>

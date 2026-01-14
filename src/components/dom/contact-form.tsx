@@ -8,8 +8,10 @@ import { Send, Paperclip, X } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useAnalytics } from "@/lib/analytics";
+import { useLanguage } from "@/components/language-provider";
 
 export default function ContactForm() {
+    const { t } = useLanguage();
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -54,8 +56,8 @@ export default function ContactForm() {
             events.formSubmit('contact_form', true);
             events.contactConversion();
 
-            toast.success('Message sent successfully!', {
-                description: 'Thank you for contacting us. We will get back to you soon.',
+            toast.success(t.contact.toast.success.title, {
+                description: t.contact.toast.success.description,
             });
 
             // Reset form
@@ -72,8 +74,8 @@ export default function ContactForm() {
             const errorMessage = error instanceof Error ? error.message : 'Unknown error';
             events.formError('contact_form', errorMessage);
 
-            toast.error('Failed to send message', {
-                description: error instanceof Error ? error.message : 'Please try again later.',
+            toast.error(t.contact.toast.error.title, {
+                description: error instanceof Error ? error.message : t.contact.toast.error.description,
             });
         } finally {
             setIsSubmitting(false);
@@ -105,7 +107,7 @@ export default function ContactForm() {
 
         if (invalidFiles.length > 0) {
             toast.error('Upload failed', {
-                description: 'Only PDF, DOC, and DOCX files are allowed.',
+                description: t.contact.toast.fileError.invalidType,
             });
             e.target.value = ''; // Reset file input
             return;
@@ -117,7 +119,7 @@ export default function ContactForm() {
 
         if (oversizedFiles.length > 0) {
             toast.error('Upload failed', {
-                description: 'Each file must be less than 10MB.',
+                description: t.contact.toast.fileError.tooLarge,
             });
             e.target.value = ''; // Reset file input
             return;
@@ -126,7 +128,7 @@ export default function ContactForm() {
         // Limit total files to 3
         if (files.length + selectedFiles.length > 3) {
             toast.error('Upload failed', {
-                description: 'You can upload a maximum of 3 files.',
+                description: t.contact.toast.fileError.tooMany,
             });
             e.target.value = ''; // Reset file input
             return;
@@ -142,8 +144,8 @@ export default function ContactForm() {
 
         // Show success toast
         const fileCount = selectedFiles.length;
-        toast.success(`File${fileCount > 1 ? 's' : ''} uploaded successfully`, {
-            description: `${fileCount} file${fileCount > 1 ? 's' : ''} added to your message.`,
+        toast.success(fileCount > 1 ? t.contact.toast.fileUpload.successPlural : t.contact.toast.fileUpload.success, {
+            description: `${fileCount} ${fileCount > 1 ? t.contact.toast.fileUpload.addedPlural : t.contact.toast.fileUpload.added}`,
         });
 
         // Reset file input to allow selecting the same files again if needed
@@ -170,12 +172,12 @@ export default function ContactForm() {
                         className="text-sm font-medium"
                         style={{ color: colors.text.primary }}
                     >
-                        Name
+                        {t.contact.form.name}
                     </label>
                     <Input
                         id="name"
                         name="name"
-                        placeholder="Name"
+                        placeholder={t.contact.form.namePlaceholder}
                         value={formData.name}
                         onChange={handleChange}
                         required
@@ -192,13 +194,13 @@ export default function ContactForm() {
                         className="text-sm font-medium"
                         style={{ color: colors.text.primary }}
                     >
-                        Email
+                        {t.contact.form.email}
                     </label>
                     <Input
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="user@example.com"
+                        placeholder={t.contact.form.emailPlaceholder}
                         value={formData.email}
                         onChange={handleChange}
                         required
@@ -215,13 +217,13 @@ export default function ContactForm() {
                         className="text-sm font-medium"
                         style={{ color: colors.text.primary }}
                     >
-                        Phone Number
+                        {t.contact.form.phone}
                     </label>
                     <Input
                         id="phone"
                         name="phone"
                         type="tel"
-                        placeholder="+1 (555) 123-4567"
+                        placeholder={t.contact.form.phonePlaceholder}
                         value={formData.phone}
                         onChange={handleChange}
                         style={{
@@ -237,12 +239,12 @@ export default function ContactForm() {
                         className="text-sm font-medium"
                         style={{ color: colors.text.primary }}
                     >
-                        Subject
+                        {t.contact.form.subject}
                     </label>
                     <Input
                         id="subject"
                         name="subject"
-                        placeholder="Dashboard"
+                        placeholder={t.contact.form.subjectPlaceholder}
                         value={formData.subject}
                         onChange={handleChange}
                         required
@@ -259,12 +261,12 @@ export default function ContactForm() {
                         className="text-sm font-medium"
                         style={{ color: colors.text.primary }}
                     >
-                        Message
+                        {t.contact.form.message}
                     </label>
                     <Textarea
                         id="message"
                         name="message"
-                        placeholder="Type your message here in English..."
+                        placeholder={t.contact.form.messagePlaceholder}
                         value={formData.message}
                         onChange={handleChange}
                         required
@@ -282,7 +284,7 @@ export default function ContactForm() {
                         className="text-sm font-medium"
                         style={{ color: colors.text.primary }}
                     >
-                        Attachments (Optional)
+                        {t.contact.form.attachments}
                     </label>
                     <div className="space-y-3">
                         <div className="relative">
@@ -309,7 +311,7 @@ export default function ContactForm() {
                             >
                                 <Paperclip className="h-4 w-4" />
                                 <span className="text-sm">
-                                    Click to upload PDF, DOC, or DOCX files (Max 10MB each, up to 3 files)
+                                    {t.contact.form.attachmentsHelp}
                                 </span>
                             </label>
                         </div>
@@ -355,7 +357,7 @@ export default function ContactForm() {
                         )}
                     </div>
                     <p className="text-xs" style={{ color: colors.text.secondary }}>
-                        Accepted formats: PDF, DOC, DOCX
+                        {t.contact.form.acceptedFormats}
                     </p>
                 </div>
                 <Button
@@ -368,7 +370,7 @@ export default function ContactForm() {
                         color: colors.text.primary
                     }}
                 >
-                    {isSubmitting ? "Sending..." : "Send Message"}
+                    {isSubmitting ? t.common.sending : t.common.sendMessage}
                     <Send className="h-4 w-4" />
                 </Button>
             </form>

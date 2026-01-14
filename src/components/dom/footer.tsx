@@ -1,62 +1,67 @@
+"use client";
+
 import Link from "next/link";
 import { Linkedin } from "lucide-react";
+import { useLanguage } from "@/components/language-provider";
 
 export const Footer = () => {
+    const { t } = useLanguage();
+
     const navigationItems = [
         {
-            title: "Platform",
+            title: t.footer.sections.platform.title,
             description: "Features for connecting, monitoring & managing devices",
             items: [
                 {
-                    title: "Solutions",
+                    title: t.footer.sections.platform.items.solutions,
                     href: "/#solutions",
                 },
                 {
-                    title: "Testimonials",
+                    title: t.footer.sections.platform.items.testimonials,
                     href: "/#testimonials",
                 },
                 {
-                    title: "FAQ",
+                    title: t.footer.sections.platform.items.faq,
                     href: "/#faq",
                 },
             ],
         },
         {
-            title: "Company",
+            title: t.footer.sections.company.title,
             description: "Learn more about our mission & team",
             items: [
                 {
-                    title: "About Us",
+                    title: t.footer.sections.company.items.about,
                     href: "/about",
                 },
                 {
-                    title: "Careers",
+                    title: t.footer.sections.company.items.careers,
                     href: "/careers",
                 },
                 {
-                    title: "Contact",
+                    title: t.footer.sections.company.items.contact,
                     href: "/contact",
                 },
             ],
         },
         {
-            title: "Legal",
+            title: t.footer.sections.legal.title,
             description: "Policies & terms governing use of our platform",
             items: [
                 {
-                    title: "Terms of Service",
+                    title: t.footer.sections.legal.items.terms,
                     href: "/terms",
                 },
                 {
-                    title: "Privacy Policy",
+                    title: t.footer.sections.legal.items.privacy,
                     href: "/privacy",
                 },
                 {
-                    title: "Security",
+                    title: t.footer.sections.legal.items.security,
                     href: "/security",
                 },
                 {
-                    title: "SLA",
+                    title: t.footer.sections.legal.items.sla,
                     href: "/sla",
                 },
             ],
@@ -70,27 +75,27 @@ export const Footer = () => {
                     <div className="flex gap-6 sm:gap-8 flex-col items-start">
                         <div className="flex gap-2 flex-col">
                             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tighter max-w-xl font-regular text-left">
-                                Built
+                                {t.common.companyName}
                             </h2>
                             <p className="text-base sm:text-lg max-w-lg leading-relaxed tracking-tight text-background/75 text-left">
-                                Build Systems That Scale Your Business
+                                {t.common.tagline}
                             </p>
                         </div>
                         <div className="flex gap-12 sm:gap-20 flex-row">
                             <div className="flex flex-col text-sm sm:text-base max-w-lg leading-relaxed tracking-tight text-background/75 text-left">
-                                <Link href="/terms">Terms of service</Link>
-                                <Link href="/privacy">Privacy Policy</Link>
+                                <Link href="/terms">{t.footer.termsOfService}</Link>
+                                <Link href="/privacy">{t.footer.privacyPolicy}</Link>
                             </div>
                         </div>
                         <div className="flex gap-4 items-center">
-                            <Link 
-                                href="https://www.linkedin.com/company/built-tech/" 
+                            <Link
+                                href="https://www.linkedin.com/company/built-tech/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 text-background/75 hover:text-background transition-colors"
                             >
                                 <Linkedin className="h-5 w-5" />
-                                <span className="text-sm sm:text-base">Follow us on LinkedIn</span>
+                                <span className="text-sm sm:text-base">{t.footer.followLinkedIn}</span>
                             </Link>
                         </div>
                     </div>

@@ -1,51 +1,53 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Boxes, Bot, Database, Workflow, Users, Globe, Code, Plug } from "lucide-react";
 import { colors } from "@/theme/colors";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/components/language-provider";
 
 const Solutions = () => {
+    const { t } = useLanguage();
+
     const features = [
         {
             icon: Boxes,
-            title: "Custom Business Systems",
-            description: "Purpose-built internal software that replaces spreadsheets, manual workflows, and inefficient tools. Unified dashboards, CRMs, inventory management, and reporting suites."
+            title: t.solutions.items.customBusinessSystems.title,
+            description: t.solutions.items.customBusinessSystems.description
         },
         {
             icon: Bot,
-            title: "AI Phone Call Agents",
-            description: "Intelligent voice bots trained on your business that answer calls, book appointments, qualify leads, and handle FAQs — 24/7 lead capture with CRM integration."
+            title: t.solutions.items.aiPhoneAgents.title,
+            description: t.solutions.items.aiPhoneAgents.description
         },
         {
             icon: Database,
-            title: "Data Tools & Custom Scrapers",
-            description: "Private, automated tools for competitive insights, lead generation, pricing intelligence, and daily reports. Get the data you need without the noise."
+            title: t.solutions.items.dataTools.title,
+            description: t.solutions.items.dataTools.description
         },
         {
             icon: Workflow,
-            title: "Automation & AI Workflows",
-            description: "Automate repetitive tasks and connect all your tools into one seamless ecosystem. Save time, reduce errors, and scale without hiring more people."
+            title: t.solutions.items.automation.title,
+            description: t.solutions.items.automation.description
         },
         {
             icon: Users,
-            title: "Employee Management Systems",
-            description: "Custom internal platforms with time tracking, task assignment, performance dashboards, automated reminders, and payroll export to keep teams accountable."
+            title: t.solutions.items.employeeManagement.title,
+            description: t.solutions.items.employeeManagement.description
         },
         {
             icon: Globe,
-            title: "Custom Websites",
-            description: "Clean, fast, modern websites designed to convert. SEO-ready builds with lead capture, booking integrations, and seamless connection to your automations."
+            title: t.solutions.items.customWebsites.title,
+            description: t.solutions.items.customWebsites.description
         },
         {
             icon: Code,
-            title: "Fully Custom Software",
-            description: "Complete software products built from scratch for unique visions. SaaS platforms, customer portals, dashboards, marketplaces, and mobile apps — scalable and secure."
+            title: t.solutions.items.customSoftware.title,
+            description: t.solutions.items.customSoftware.description
         },
         {
             icon: Plug,
-            title: "API & System Integrations",
-            description: "Connect your tools seamlessly with custom API integrations. Sync data between platforms, automate workflows, and eliminate duplicate data entry across your tech stack."
+            title: t.solutions.items.apiIntegrations.title,
+            description: t.solutions.items.apiIntegrations.description
         }
     ];
 
@@ -73,8 +75,7 @@ const Solutions = () => {
     return (
         <section
             id="solutions"
-            className="w-full py-12 sm:py-16 md:py-20 lg:py-40"
-            style={{ backgroundColor: colors.background.secondary }}
+            className="w-full py-12 sm:py-16 md:py-20 lg:py-40 "
         >
             <div className="container mx-auto px-4 sm:px-6 md:px-8">
                 <motion.div
@@ -96,19 +97,19 @@ const Solutions = () => {
                             viewport={{ once: true }}
                             transition={{ duration: 0.4 }}
                         >
-                            Services
+                            {t.solutions.badge}
                         </motion.div>
                         <h2
                             className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl lg:text-5xl"
                             style={{ color: colors.text.primary }}
                         >
-                            Solutions Built for Growth
+                            {t.solutions.title}
                         </h2>
                         <p
                             className="mx-auto max-w-[700px] text-base sm:text-lg md:text-xl"
                             style={{ color: colors.text.secondary }}
                         >
-                            From AI-powered automations to fully custom software — we build systems that drive revenue, eliminate manual work, and scale with your business.
+                            {t.solutions.description}
                         </p>
                     </div>
                 </motion.div>
@@ -120,44 +121,64 @@ const Solutions = () => {
                     viewport={{ once: true, margin: "-100px" }}
                 >
                     {features.map((feature, index) => (
-                        <motion.div key={index} variants={itemVariants}>
-                            <Card
-                                className="h-full hover:shadow-lg transition-shadow group"
-                                style={{
-                                    backgroundColor: colors.background.tertiary,
-                                    borderColor: colors.border.default
-                                }}
+                        <motion.div
+                            key={index}
+                            variants={itemVariants}
+                            className="h-full min-h-[300px]"
+                            style={{ perspective: "1000px" }}
+                        >
+                            <motion.div
+                                className="relative h-full min-h-[300px] cursor-pointer"
+                                style={{ transformStyle: "preserve-3d" }}
+                                whileHover={{ rotateY: 180 }}
+                                transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
                             >
-                                <CardHeader>
-                                    <div className="flex items-center gap-4">
-                                        <motion.div
-                                            className="p-2 rounded-lg"
-                                            style={{ backgroundColor: `${colors.primary}1A` }}
-                                            whileHover={{ scale: 1.1, rotate: 5 }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            <feature.icon
-                                                className="h-6 w-6"
-                                                style={{ color: colors.primary }}
-                                            />
-                                        </motion.div>
-                                        <CardTitle
-                                            className="text-xl"
-                                            style={{ color: colors.text.primary }}
-                                        >
-                                            {feature.title}
-                                        </CardTitle>
+                                {/* Front of card */}
+                                <div
+                                    className="absolute inset-0 rounded-xl p-6 flex flex-col items-center justify-center gap-4 text-center"
+                                    style={{
+                                        backgroundColor: colors.background.secondary,
+                                        borderColor: colors.border.default,
+                                        borderWidth: '1px',
+                                        backfaceVisibility: "hidden",
+                                    }}
+                                >
+                                    <div
+                                        className="p-4 rounded-xl"
+                                        style={{ backgroundColor: colors.neutral[800] }}
+                                    >
+                                        <feature.icon
+                                            className="h-12 w-12"
+                                            style={{ color: colors.primary }}
+                                        />
                                     </div>
-                                </CardHeader>
-                                <CardContent>
-                                    <CardDescription
-                                        className="text-base"
+                                    <h3
+                                        className="text-xl font-semibold"
+                                        style={{ color: colors.text.primary }}
+                                    >
+                                        {feature.title}
+                                    </h3>
+                                </div>
+
+                                {/* Back of card */}
+                                <div
+                                    className="absolute inset-0 rounded-xl p-6 flex items-center justify-center"
+                                    style={{
+                                        backgroundColor: colors.background.secondary,
+                                        borderColor: colors.border.emphasis,
+                                        borderWidth: '1px',
+                                        backfaceVisibility: "hidden",
+                                        transform: "rotateY(180deg)",
+                                    }}
+                                >
+                                    <p
+                                        className="text-base leading-relaxed"
                                         style={{ color: colors.text.secondary }}
                                     >
                                         {feature.description}
-                                    </CardDescription>
-                                </CardContent>
-                            </Card>
+                                    </p>
+                                </div>
+                            </motion.div>
                         </motion.div>
                     ))}
                 </motion.div>

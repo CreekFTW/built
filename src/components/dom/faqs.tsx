@@ -7,42 +7,12 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 import { colors } from "@/theme/colors";
+import { useLanguage } from "@/components/language-provider";
 
 const FAQ = () => {
-    const faqs = [
-        {
-            question: "What types of businesses do you work with?",
-            answer: "We work with growing businesses across all industries — from service companies and e-commerce brands to agencies, startups, and established enterprises. If you're dealing with manual workflows, missed leads, or need custom software to scale, we can help."
-        },
-        {
-            question: "How long does it take to build a custom solution?",
-            answer: "Timeline varies based on complexity. Simple automations and AI phone agents can be live in 1-2 weeks. Custom business systems typically take 4-8 weeks. Full software platforms range from 2-6 months. We'll give you a clear timeline after understanding your needs."
-        },
-        {
-            question: "Do you provide ongoing support and maintenance?",
-            answer: "Yes. We offer ongoing support, maintenance, and updates for all our solutions. We're your long-term tech partner — we don't just build and disappear. You'll have access to our team for troubleshooting, updates, and feature additions."
-        },
-        {
-            question: "What's the difference between your solutions and off-the-shelf software?",
-            answer: "Off-the-shelf tools force you to adapt your business to their limitations. We build custom solutions tailored exactly to your workflows, processes, and goals. You get software that fits your business perfectly, integrates with your existing tools, and scales as you grow."
-        },
-        {
-            question: "Can you integrate with our existing tools and systems?",
-            answer: "Absolutely. We specialize in connecting systems together. Whether it's your CRM, accounting software, e-commerce platform, or internal databases — we build integrations that make everything work seamlessly as one unified ecosystem."
-        },
-        {
-            question: "How do AI phone agents work?",
-            answer: "Our AI phone agents are conversational voice bots trained on your business. They answer calls 24/7, understand your services, handle FAQs, book appointments, qualify leads, and create tickets or CRM entries. When needed, they seamlessly transfer to your team. It's like having a virtual receptionist that never sleeps."
-        },
-        {
-            question: "What if we need changes or new features later?",
-            answer: "We build with flexibility in mind. All our solutions are designed to evolve with your business. Need new features? Want to adjust workflows? No problem. We make updates and additions as your needs change — you're never locked into a rigid system."
-        },
-        {
-            question: "How do we get started?",
-            answer: "Simple. Fill out our contact form or email us. We'll schedule a call to understand your goals, challenges, and requirements. Then we'll propose a solution with a clear scope, timeline, and pricing. Once approved, we get to work building your custom system."
-        }
-    ];
+    const { t } = useLanguage();
+
+    const faqs = t.faq.items;
 
     return (
         <section
@@ -60,19 +30,19 @@ const FAQ = () => {
                                 color: colors.text.tertiary
                             }}
                         >
-                            FAQ
+                            {t.faq.badge}
                         </div>
                         <h2
                             className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl"
                             style={{ color: colors.text.primary }}
                         >
-                            Frequently Asked Questions
+                            {t.faq.title}
                         </h2>
                         <p
                             className="mx-auto max-w-[700px] md:text-xl"
                             style={{ color: colors.text.secondary }}
                         >
-                            Everything you need to know about our custom software solutions and how we work with businesses.
+                            {t.faq.description}
                         </p>
                     </div>
                 </div>
