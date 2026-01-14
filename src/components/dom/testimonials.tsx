@@ -4,52 +4,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Star, Quote } from "lucide-react";
 import { colors } from "@/theme/colors";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/components/language-provider";
 
 const Testimonials = () => {
-    const testimonials = [
-        {
-            name: "Marcus Chen",
-            role: "Owner",
-            company: "Precision HVAC",
-            content: "Before Built, we were drowning in missed calls and lost leads. Their AI phone system books service calls while we're on job sites, and the dispatcher dashboard they created cut our scheduling time from 2 hours to 15 minutes daily. We're booking 40% more jobs.",
-            rating: 5
-        },
-        {
-            name: "Jennifer Walsh",
-            role: "Operations Manager",
-            company: "Walsh Property Group",
-            content: "We manage 200+ rental units and were using 4 different tools that didn't talk to each other. Built consolidated everything into one system - tenant portal, maintenance requests, rent tracking, vendor management. Our team actually enjoys using it, which says everything.",
-            rating: 5
-        },
-        {
-            name: "Aaron Patel",
-            role: "Founder & CEO",
-            company: "Streamline Dental Supply",
-            content: "The custom pricing engine they built processes thousands of SKUs and gives our sales team instant quotes with proper margins. What used to take 20 minutes now takes 30 seconds. Our close rate went up 25% in the first quarter.",
-            rating: 5
-        },
-        {
-            name: "Rachel Kowalski",
-            role: "Director of Sales",
-            company: "Midwest Equipment Rentals",
-            content: "Built integrated our inventory system with online booking and automated follow-ups. We capture rental requests 24/7 now, and the system automatically sends quotes and contracts. It's like having 3 extra salespeople, but they never sleep or take vacation.",
-            rating: 5
-        },
-        {
-            name: "Tom Hernandez",
-            role: "Co-Founder",
-            company: "Harbor Freight Logistics",
-            content: "The route optimization tool they developed saves us 15-20 hours of driver time per week. Real-time tracking, proof of delivery, automatic customer notifications - our clients love the visibility and we love the fuel savings. Paid for itself in 6 weeks.",
-            rating: 5
-        },
-        {
-            name: "Kelly Morrison",
-            role: "Managing Partner",
-            company: "Morrison Law Firm",
-            content: "Their client intake automation is incredible. New leads fill out a smart form, get scheduled automatically, receive reminder texts, and we have all their info organized before they walk in. We've cut no-shows by 60% and our front desk can focus on clients, not paperwork.",
-            rating: 5
-        }
-    ];
+    const { t } = useLanguage();
+
+    const testimonials = t.testimonials.items.map((item) => ({
+        ...item,
+        rating: 5
+    }));
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -95,19 +58,19 @@ const Testimonials = () => {
                             viewport={{ once: true }}
                             transition={{ duration: 0.4 }}
                         >
-                            Client Success
+                            {t.testimonials.badge}
                         </motion.div>
                         <h2
                             className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl lg:text-5xl"
                             style={{ color: colors.text.primary }}
                         >
-                            Trusted By Growing Businesses
+                            {t.testimonials.title}
                         </h2>
                         <p
                             className="mx-auto max-w-[700px] text-base sm:text-lg md:text-xl"
                             style={{ color: colors.text.secondary }}
                         >
-                            Real results from real clients who transformed their operations with custom software and automation.
+                            {t.testimonials.description}
                         </p>
                     </div>
                 </motion.div>

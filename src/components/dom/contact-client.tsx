@@ -5,26 +5,29 @@ import ContactForm from "./contact-form";
 import { Mail, Phone, MapPin, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useLanguage } from "@/components/language-provider";
 
 export default function ContactClient() {
+    const { t } = useLanguage();
+
     const contactInfo = [
         {
             icon: Mail,
-            title: "Email",
-            detail: "hello@builtwithtech.io",
-            description: "Get in touch anytime"
+            title: t.contact.info.email.title,
+            detail: t.contact.info.email.detail,
+            description: t.contact.info.email.description
         },
         {
             icon: Phone,
-            title: "Response Time",
-            detail: "< 24 hours",
-            description: "We respond fast"
+            title: t.contact.info.responseTime.title,
+            detail: t.contact.info.responseTime.detail,
+            description: t.contact.info.responseTime.description
         },
         {
             icon: MapPin,
-            title: "Availability",
-            detail: "Remote-First",
-            description: "We work with clients worldwide"
+            title: t.contact.info.availability.title,
+            detail: t.contact.info.availability.detail,
+            description: t.contact.info.availability.description
         }
     ];
 
@@ -67,7 +70,7 @@ export default function ContactClient() {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.4, delay: 0.1 }}
                         >
-                            Contact Us
+                            {t.contact.badge}
                         </motion.div>
                         <motion.h1
                             className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl max-w-3xl"
@@ -76,7 +79,7 @@ export default function ContactClient() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
                         >
-                            Let&apos;s Build Something Great
+                            {t.contact.title}
                         </motion.h1>
                         <motion.p
                             className="mx-auto max-w-[700px] md:text-xl"
@@ -85,7 +88,7 @@ export default function ContactClient() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.3 }}
                         >
-                            Ready to streamline your business with custom software and AI automations? Tell us about your project and we&apos;ll help you build systems that scale.
+                            {t.contact.description}
                         </motion.p>
                         <motion.div
                             className="flex flex-col sm:flex-row gap-4 justify-center mt-4"
@@ -104,7 +107,7 @@ export default function ContactClient() {
                                     whileTap={{ scale: 0.95 }}
                                 >
                                     <Calendar className="h-5 w-5" />
-                                    Book a Call
+                                    {t.common.bookACall}
                                 </motion.button>
                             </Link>
                         </motion.div>
@@ -131,13 +134,13 @@ export default function ContactClient() {
                                     className="text-3xl font-bold tracking-tighter sm:text-4xl"
                                     style={{ color: colors.text.primary }}
                                 >
-                                    Start Your Project Today
+                                    {t.contact.formSection.title}
                                 </h2>
                                 <p
                                     className="text-base md:text-lg"
                                     style={{ color: colors.text.secondary }}
                                 >
-                                    Whether you need a custom business system, AI phone agents, automation workflows, or a complete software platform — we&apos;re here to help you scale efficiently and profitably.
+                                    {t.contact.formSection.description}
                                 </p>
                             </div>
                             <div className="space-y-4">
@@ -145,7 +148,7 @@ export default function ContactClient() {
                                     className="text-xl font-semibold"
                                     style={{ color: colors.text.primary }}
                                 >
-                                    What We&apos;ll Discuss
+                                    {t.contact.formSection.whatWeDiscuss}
                                 </h3>
                                 <motion.ul
                                     className="space-y-2"
@@ -154,12 +157,7 @@ export default function ContactClient() {
                                     whileInView="visible"
                                     viewport={{ once: true }}
                                 >
-                                    {[
-                                        "Your business goals and current challenges",
-                                        "Custom solutions tailored to your needs",
-                                        "Timeline and project scope",
-                                        "Pricing and next steps"
-                                    ].map((item, index) => (
+                                    {t.contact.formSection.discussionItems.map((item, index) => (
                                         <motion.li
                                             key={index}
                                             className="flex items-center gap-2"

@@ -6,33 +6,35 @@ import { colors } from "@/theme/colors";
 import { useRouter } from "next/navigation";
 import ShootingStarsBackground from "@/components/dom/shooting-stars-background";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/components/language-provider";
 
 const Hero = () => {
-    const router = useRouter()
+    const router = useRouter();
+    const { t } = useLanguage();
 
     const stats = [
         {
             icon: Zap,
-            value: "2-4 Weeks",
-            label: "Average Launch Time",
+            value: t.hero.stats.launchTime.value,
+            label: t.hero.stats.launchTime.label,
             delay: 0.6
         },
         {
             icon: Clock,
-            value: "70%+",
-            label: "Time Saved on Manual Work",
+            value: t.hero.stats.timeSaved.value,
+            label: t.hero.stats.timeSaved.label,
             delay: 0.7
         },
         {
             icon: TrendingUp,
-            value: "10x",
-            label: "ROI in First Year",
+            value: t.hero.stats.roi.value,
+            label: t.hero.stats.roi.label,
             delay: 0.8
         },
         {
             icon: CheckCircle,
-            value: "100%",
-            label: "Code Ownership",
+            value: t.hero.stats.ownership.value,
+            label: t.hero.stats.ownership.label,
             delay: 0.9
         }
     ];
@@ -58,7 +60,7 @@ const Hero = () => {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.4, delay: 0.1 }}
                         >
-                            Custom Software & AI Solutions
+                            {t.hero.badge}
                         </motion.div>
                         <motion.h1
                             className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl px-2"
@@ -67,7 +69,7 @@ const Hero = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
                         >
-                            Build Systems That Scale Your Business
+                            {t.hero.title}
                         </motion.h1>
                         <motion.p
                             className="mx-auto max-w-[700px] text-base sm:text-lg md:text-xl px-4"
@@ -76,7 +78,7 @@ const Hero = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.3 }}
                         >
-                            Full-stack tech partner building custom software and automations to grow and streamline your business. Replace manual work, capture every lead, and get systems that behave themselves.
+                            {t.hero.description}
                         </motion.p>
                     </motion.div>
                     <motion.div
@@ -87,7 +89,7 @@ const Hero = () => {
                     >
                         <Button
                             size="lg"
-                            className="gap-2"
+                            className="gap-2 hover:cursor-pointer"
                             style={{
                                 backgroundColor: colors.primary,
                                 color: colors.text.primary
@@ -95,12 +97,12 @@ const Hero = () => {
                             onClick={() => router.push("/setup-meeting")}
                         >
                             <Calendar className="h-4 w-4" />
-                            Book a Call
+                            {t.common.bookACall}
                         </Button>
                         <Button
                             size="lg"
                             variant="outline"
-                            className="gap-2"
+                            className="gap-2 hover:cursor-pointer"
                             style={{
                                 borderColor: colors.border.emphasis,
                                 color: colors.text.primary,
@@ -108,7 +110,7 @@ const Hero = () => {
                             }}
                             onClick={() => router.push("/contact#contact-form")}
                         >
-                            Get Started
+                            {t.common.getStarted}
                             <ArrowRight className="h-4 w-4" />
                         </Button>
                     </motion.div>

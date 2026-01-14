@@ -2,9 +2,10 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { colors } from "@/theme/colors";
-import { ExternalLink, Github, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
+import { useLanguage } from "@/components/language-provider";
 
 interface Project {
     id: number;
@@ -14,12 +15,13 @@ interface Project {
     tags: string[];
     liveUrl?: string;
     githubUrl?: string;
-    stats?: {
+    stats: {
         label: string;
         value: string;
     }[];
 }
 
+/*
 const projects: Project[] = [
     {
         id: 1,
@@ -62,8 +64,11 @@ const projects: Project[] = [
         ]
     }
 ];
+*/
 
-const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+
+
+const ProjectCard = ({ project, index, discussLabel }: { project: Project; index: number; discussLabel: string }) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -83,14 +88,9 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
     return (
         <motion.div
             ref={cardRef}
-            style={{ 
-                opacity, 
-                scale, 
-                y,
-                transformPerspective: 1000
-            }}
+            style={{ opacity, scale, y, transformPerspective: 1000 }}
             className="mb-32 last:mb-0 cursor-pointer"
-            onClick={() => window.open('https://t.me/built', '_blank')}
+            onClick={() => window.open(project.liveUrl || 'https://t.me/built', '_blank')}
         >
             <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center ${!isEven ? 'lg:grid-flow-dense' : ''}`}>
                 {/* Video Section */}
@@ -99,17 +99,11 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                     style={{ y: videoY, rotateX }}
                     initial={{ opacity: 0, x: isEven ? -100 : 100, rotateY: isEven ? -25 : 25 }}
                     whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-                    transition={{ 
-                        duration: 0.8, 
-                        delay: 0.1,
-                        type: "spring",
-                        stiffness: 50,
-                        damping: 20
-                    }}
+                    transition={{ duration: 0.8, delay: 0.1, type: "spring", stiffness: 50, damping: 20 }}
                     viewport={{ once: false, margin: "-150px", amount: 0.3 }}
                 >
                     <div className="relative rounded-2xl overflow-hidden group">
-                        <motion.div 
+                        <motion.div
                             className="relative aspect-video rounded-2xl overflow-hidden"
                             style={{
                                 backgroundColor: colors.background.secondary,
@@ -133,7 +127,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                             />
                         </motion.div>
 
-                        <motion.div 
+                        <motion.div
                             className="absolute -inset-1 rounded-2xl -z-10 blur-xl"
                             style={{
                                 background: `linear-gradient(45deg, ${colors.primary}, ${colors.accent.cyan})`
@@ -151,197 +145,99 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                     className={`space-y-6 ${!isEven ? 'lg:col-start-1 lg:row-start-1' : ''}`}
                     initial={{ opacity: 0, x: isEven ? 100 : -100 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ 
-                        duration: 0.8, 
-                        delay: 0.2,
-                        type: "spring",
-                        stiffness: 50,
-                        damping: 20
-                    }}
+                    transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 50, damping: 20 }}
                     viewport={{ once: false, margin: "-150px", amount: 0.3 }}
                 >
                     {/* Project Number */}
-                    <motion.div 
-                        className="flex items-center gap-3"
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
-                        viewport={{ once: false, amount: 0.8 }}
-                    >
-                        <motion.div
-                            className="text-6xl font-bold"
-                            style={{ 
-                                color: colors.primary,
-                                opacity: 0.2
-                            }}
-                            whileInView={{ 
-                                opacity: [0.2, 0.5, 0.2],
-                            }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                        >
+                    <motion.div className="flex items-center gap-3">
+                        <motion.div className="text-6xl font-bold" style={{ color: colors.primary, opacity: 0.2 }}>
                             {String(index + 1).padStart(2, '0')}
                         </motion.div>
-                        <motion.div 
-                            className="h-px flex-1" 
-                            style={{ backgroundColor: colors.border?.default || 'rgba(255,255,255,0.1)' }}
-                            initial={{ scaleX: 0 }}
-                            whileInView={{ scaleX: 1 }}
-                            transition={{ duration: 0.8, delay: 0.4 }}
-                            viewport={{ once: false, amount: 0.8 }}
-                        />
+                        <motion.div className="h-px flex-1" style={{ backgroundColor: colors.border?.default || 'rgba(255,255,255,0.1)' }} />
                     </motion.div>
 
                     {/* Title */}
-                    <motion.h3 
-                        className="text-3xl md:text-4xl lg:text-5xl font-bold"
-                        style={{ color: colors.text.primary }}
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                        viewport={{ once: false, amount: 0.8 }}
-                    >
+                    <motion.h3 className="text-3xl md:text-4xl lg:text-5xl font-bold" style={{ color: colors.text.primary }}>
                         {project.title}
                     </motion.h3>
 
                     {/* Description */}
-                    <motion.p 
-                        className="text-lg leading-relaxed"
-                        style={{ color: colors.text.secondary }}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.5 }}
-                        viewport={{ once: false, amount: 0.8 }}
-                    >
+                    <motion.p className="text-lg leading-relaxed" style={{ color: colors.text.secondary }}>
                         {project.description}
                     </motion.p>
 
                     {/* Tags */}
-                    <motion.div 
-                        className="flex flex-wrap gap-2"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ duration: 0.6, delay: 0.6 }}
-                        viewport={{ once: false, amount: 0.8 }}
-                    >
-                        {project.tags.map((tag, tagIndex) => (
-                            <motion.span
-                                key={tagIndex}
-                                className="px-4 py-2 rounded-lg text-sm font-medium"
-                                style={{
-                                    backgroundColor: `${colors.primary}1A`,
-                                    color: colors.primary,
-                                    border: `1px solid ${colors.primary}33`
-                                }}
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                transition={{ 
-                                    duration: 0.4, 
-                                    delay: 0.6 + (tagIndex * 0.1),
-                                    type: "spring",
-                                    stiffness: 200
-                                }}
-                                viewport={{ once: false, amount: 0.8 }}
-                                whileHover={{ 
-                                    scale: 1.1,
-                                    backgroundColor: colors.primary,
-                                    color: colors.text.primary,
-                                    transition: { duration: 0.2 }
-                                }}
-                            >
+                    <motion.div className="flex flex-wrap gap-2">
+                        {project.tags?.map((tag, idx) => (
+                            <motion.span key={idx} className="px-4 py-2 rounded-lg text-sm font-medium" style={{
+                                backgroundColor: `${colors.primary}1A`,
+                                color: colors.primary,
+                                border: `1px solid ${colors.primary}33`
+                            }}>
                                 {tag}
                             </motion.span>
                         ))}
                     </motion.div>
 
                     {/* Stats */}
-                    {project.stats && (
-                        <motion.div 
-                            className="grid grid-cols-3 gap-4 pt-4"
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.7 }}
-                            viewport={{ once: false, amount: 0.8 }}
-                        >
+                    {project.stats?.length > 0 && (
+                        <div className="grid grid-cols-3 gap-4 pt-4">
                             {project.stats.map((stat, statIndex) => (
-                                <motion.div
-                                    key={statIndex}
-                                    className="text-center p-4 rounded-lg"
-                                    style={{
-                                        backgroundColor: colors.background.secondary,
-                                        border: `1px solid ${colors.border?.default || 'rgba(255,255,255,0.1)'}`
-                                    }}
-                                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                                    transition={{ 
-                                        duration: 0.5, 
-                                        delay: 0.7 + (statIndex * 0.1),
-                                        type: "spring",
-                                        stiffness: 150
-                                    }}
-                                    viewport={{ once: false, amount: 0.8 }}
-                                    whileHover={{ 
-                                        y: -8, 
-                                        scale: 1.05,
-                                        borderColor: colors.primary,
-                                        transition: { duration: 0.2 }
-                                    }}
-                                >
-                                    <motion.div 
-                                        className="text-2xl font-bold mb-1"
-                                        style={{ color: colors.primary }}
-                                        whileHover={{ scale: 1.1 }}
-                                    >
+                                <div key={statIndex} className="text-center p-4 rounded-lg" style={{
+                                    backgroundColor: colors.background.secondary,
+                                    border: `1px solid ${colors.border?.default || 'rgba(255,255,255,0.1)'}`
+                                }}>
+                                    <div className="text-2xl font-bold mb-1" style={{ color: colors.primary }}>
                                         {stat.value}
-                                    </motion.div>
-                                    <div 
-                                        className="text-xs"
-                                        style={{ color: colors.text.tertiary }}
-                                    >
+                                    </div>
+                                    <div className="text-xs" style={{ color: colors.text.tertiary }}>
                                         {stat.label}
                                     </div>
-                                </motion.div>
+                                </div>
                             ))}
-                        </motion.div>
+                        </div>
                     )}
 
-                    {/* Action Buttons */}
-                    <motion.div 
-                        className="flex gap-4 pt-4"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.8 }}
-                        viewport={{ once: false, amount: 0.8 }}
-                    >
-                        <motion.div
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <Button
-                                className="gap-2"
-                                style={{
-                                    backgroundColor: colors.primary,
-                                    color: colors.text.primary
-                                }}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    window.open('https://t.me/built', '_blank');
-                                }}
-                            >
-                                Discuss Project
-                                <MessageCircle className="h-4 w-4" />
-                            </Button>
-                        </motion.div>
-                    </motion.div>
+                    {/* Action Button */}
+                    <div className="flex gap-4 pt-4">
+                        <Button style={{ backgroundColor: colors.primary, color: colors.text.primary }} onClick={(e) => {
+                            e.stopPropagation();
+                            window.open(project.liveUrl || 'https://t.me/built', '_blank');
+                        }}>
+                            {discussLabel} <MessageCircle className="h-4 w-4" />
+                        </Button>
+                    </div>
                 </motion.div>
             </div>
         </motion.div>
     );
 };
 
+
+const projectVideos: Record<number, string> = {
+    1: "ai-caller",
+    2: "car-scrapper",
+    3: "tasttyy-crm"
+}
+
 const ProjectsPreview = () => {
+    const { t } = useLanguage();
+
+    const projects: Project[] = Object.entries(t.projects.items).map(
+        ([key, item], index) => ({
+            id: index + 1,
+            title: item.title,
+            description: item.description,
+            videoUrl: `/videos/${projectVideos[index + 1]}.mp4`,
+            tags: item.tags, 
+            liveUrl: "https://t.me/built",
+            stats: item.stats
+        })
+    );
+
     return (
         <section className="relative w-full py-20 md:py-32 overflow-hidden">
-            <div 
+            <div
                 className="absolute inset-0 opacity-30"
                 style={{
                     background: `radial-gradient(circle at 50% 0%, ${colors.primary}15, transparent 50%)`
@@ -367,25 +263,25 @@ const ProjectsPreview = () => {
                         transition={{ duration: 0.4 }}
                         viewport={{ once: true }}
                     >
-                        Our Work
+                        {t.projects.badge}
                     </motion.div>
-                    <h2 
+                    <h2
                         className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
                         style={{ color: colors.text.primary }}
                     >
-                        Projects That Drive Results
+                        {t.projects.title}
                     </h2>
-                    <p 
+                    <p
                         className="text-lg md:text-xl"
                         style={{ color: colors.text.secondary }}
                     >
-                        Real systems solving real problems. Each project is custom-built to scale businesses and eliminate manual work.
+                        {t.projects.description}
                     </p>
                 </motion.div>
 
                 <div className="max-w-7xl mx-auto">
                     {projects.map((project, index) => (
-                        <ProjectCard key={project.id} project={project} index={index} />
+                        <ProjectCard key={project.id} project={project} index={index} discussLabel={t.common.discussProject} />
                     ))}
                 </div>
             </div>

@@ -3,36 +3,39 @@
 import { colors } from "@/theme/colors";
 import { Users, Target, Zap, Award } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/components/language-provider";
 
 export default function About() {
+    const { t } = useLanguage();
+
     const values = [
         {
             icon: Target,
-            title: "Outcome-Driven",
-            description: "We're not selling code — we're selling results. More revenue, less manual work, faster customer response, and systems that replace inefficient processes."
+            title: t.about.values.items.outcomeDriven.title,
+            description: t.about.values.items.outcomeDriven.description
         },
         {
             icon: Zap,
-            title: "Built for Speed",
-            description: "Modern tech stack, efficient workflows, and rapid deployment. We build fast, test thoroughly, and ship solutions that work from day one."
+            title: t.about.values.items.builtForSpeed.title,
+            description: t.about.values.items.builtForSpeed.description
         },
         {
             icon: Users,
-            title: "True Partnership",
-            description: "Your dedicated tech team that understands your business. We're here for the long haul — building, maintaining, and scaling as you grow."
+            title: t.about.values.items.truePartnership.title,
+            description: t.about.values.items.truePartnership.description
         },
         {
             icon: Award,
-            title: "Enterprise Quality",
-            description: "Premium software without the enterprise price tag. Clean code, secure architecture, and systems built to scale with your business."
+            title: t.about.values.items.enterpriseQuality.title,
+            description: t.about.values.items.enterpriseQuality.description
         }
     ];
 
     const stats = [
-        { label: "Custom Solutions", value: "100+" },
-        { label: "Businesses Automated", value: "50+" },
-        { label: "Uptime Guarantee", value: "99.9%" },
-        { label: "Support Available", value: "24/7" }
+        { label: t.about.stats.customSolutions, value: "100+" },
+        { label: t.about.stats.businessesAutomated, value: "50+" },
+        { label: t.about.stats.uptimeGuarantee, value: "99.9%" },
+        { label: t.about.stats.supportAvailable, value: "24/7" }
     ];
 
     const containerVariants = {
@@ -74,7 +77,7 @@ export default function About() {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.4, delay: 0.1 }}
                         >
-                            About Us
+                            {t.about.badge}
                         </motion.div>
                         <motion.h1
                             className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl max-w-3xl"
@@ -83,7 +86,7 @@ export default function About() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
                         >
-                            Your Digital Forge for Business Systems
+                            {t.about.title}
                         </motion.h1>
                         <motion.p
                             className="mx-auto max-w-[700px] md:text-xl"
@@ -92,7 +95,7 @@ export default function About() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.3 }}
                         >
-                            We&apos;re a full-stack tech partner that builds custom software and automations to grow and streamline businesses. Walk in with chaos, walk out with systems that behave themselves.
+                            {t.about.description}
                         </motion.p>
                     </motion.div>
                 </div>
@@ -152,19 +155,19 @@ export default function About() {
                                 className="text-3xl font-bold tracking-tighter sm:text-4xl"
                                 style={{ color: colors.text.primary }}
                             >
-                                We Build Systems That Actually Work
+                                {t.about.story.title}
                             </h2>
                             <p
                                 className="text-base md:text-lg"
                                 style={{ color: colors.text.secondary }}
                             >
-                                Most businesses are held back by inefficient processes, missed opportunities, and manual work that shouldn&apos;t exist. We fix that. Built specializes in creating custom software, AI automations, and business systems that eliminate friction and unlock growth.
+                                {t.about.story.paragraph1}
                             </p>
                             <p
                                 className="text-base md:text-lg"
                                 style={{ color: colors.text.secondary }}
                             >
-                                Whether it&apos;s an AI phone agent that captures every lead, a custom dashboard that unifies your operations, or workflow automation that saves your team hours every day — we build solutions that pay for themselves and scale with your business.
+                                {t.about.story.paragraph2}
                             </p>
                         </motion.div>
                         <motion.div
@@ -252,13 +255,13 @@ export default function About() {
                             className="text-3xl font-bold tracking-tighter sm:text-4xl"
                             style={{ color: colors.text.primary }}
                         >
-                            How We Work
+                            {t.about.values.title}
                         </h2>
                         <p
                             className="mx-auto max-w-[700px] md:text-xl"
                             style={{ color: colors.text.secondary }}
                         >
-                            We&apos;re not just developers — we&apos;re your technical partner focused on delivering real business results.
+                            {t.about.values.description}
                         </p>
                     </motion.div>
                     <motion.div

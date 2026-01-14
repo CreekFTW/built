@@ -9,6 +9,8 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { useLanguage } from "@/components/language-provider";
 import { Menu, MoveRight, X, Send } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
@@ -29,24 +31,25 @@ interface ISubNavigationItem {
 
 export const Navbar = () => {
     const router = useRouter();
+    const { t } = useLanguage();
     const navigationItems: INavigationItems[] = [
         {
-            title: "Home",
+            title: t.nav.home,
             href: "/",
             description: "",
         },
         {
-            title: "Solutions",
+            title: t.nav.solutions,
             href: "/#solutions",
             description: "",
         },
         {
-            title: "Testimonials",
+            title: t.nav.testimonials,
             href: "/#testimonials",
             description: "",
         },
         {
-            title: "FAQ",
+            title: t.nav.faq,
             href: "/#faq",
             description: "",
         },
@@ -55,11 +58,11 @@ export const Navbar = () => {
     const [isOpen, setOpen] = useState(false);
     return (
         <header className="w-full z-40 fixed top-0 left-0 bg-background border-b border-border">
-            <div className="container relative mx-auto min-h-16 sm:min-h-20 flex gap-4 flex-row xl:grid xl:grid-cols-3 items-center px-4 sm:px-6 md:px-10 2xl:px-0">
-                <div className="flex xl:justify-center">
-                    <Link href="/" className="font-semibold text-lg sm:text-base">Built</Link>
+            <div className="container relative mx-auto min-h-16 sm:min-h-20 flex gap-4 flex-row xl:grid xl:grid-cols-10 items-center px-4 sm:px-6 md:px-10 2xl:px-0">
+                <div className="flex xl:justify-center col-span-2">
+                    <Link href="/" className="font-semibold text-lg sm:text-base">{t.common.companyName}</Link>
                 </div>
-                <div className="justify-start items-center gap-4 xl:flex hidden flex-row">
+                <div className=" gap-4 xl:flex hidden flex-row justify-start items-center col-span-6">
                     <NavigationMenu className="flex justify-start items-start">
                         <NavigationMenuList className="flex justify-start gap-4 flex-row">
                             {navigationItems.map((item) => (
@@ -85,7 +88,7 @@ export const Navbar = () => {
                                                             </p>
                                                         </div>
                                                         <Button size="sm" className="mt-10" onClick={() => router.push("/contact#contact-form")}>
-                                                            Get started
+                                                            {t.common.getStarted}
                                                         </Button>
                                                     </div>
                                                     <div className="flex flex-col text-sm h-full justify-end">
@@ -109,17 +112,20 @@ export const Navbar = () => {
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
-                <div className="flex justify-end w-full gap-4">
+                <div className="flex justify-end w-full gap-4 col-span-2">
+                    <div className="hidden xl:flex">
+                        <LanguageSwitcher />
+                    </div>
                     <Button variant="ghost" className="hidden xl:inline" onClick={() => router.push(`/about`)}>
-                        About Us
+                        {t.nav.about}
                     </Button>
                     <div className="border-r hidden xl:inline"></div>
-                    <Button variant="outline" className="hidden xl:inline" onClick={() => router.push(`/contact`)}>Contact Us</Button>
+                    <Button variant="outline" className="hidden xl:inline" onClick={() => router.push(`/contact`)}>{t.nav.contact}</Button>
                     <Button variant="ghost" size="icon" className="hidden xl:flex xl:justify-center pr-0.5" onClick={() => window.open('https://t.me/built', '_blank')}>
                         <Send className="h-4 w-4" />
                     </Button>
                 </div>
-                <div className="flex w-12 shrink xl:hidden items-end justify-end">
+                <div className="flex w-12 shrink xl:hidden items-end justify-end col-span-2">
                     <Button variant="ghost" size="sm" onClick={() => setOpen(!isOpen)}>
                         {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                     </Button>
@@ -181,12 +187,16 @@ export const Navbar = () => {
                                     animate={{ opacity: 1 }}
                                     transition={{ duration: 0.3, delay: navigationItems.length * 0.1 }}
                                 >
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-lg">{t.common.language}</span>
+                                        <LanguageSwitcher />
+                                    </div>
                                     <Link
                                         href={`${process.env.NEXT_PUBLIC_ROOT}/about`}
                                         className="flex justify-between items-center hover:text-primary transition-colors"
                                         onClick={() => setOpen(false)}
                                     >
-                                        <span className="text-lg">About Us</span>
+                                        <span className="text-lg">{t.nav.about}</span>
                                         <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
                                     </Link>
                                     <Link
@@ -194,7 +204,7 @@ export const Navbar = () => {
                                         className="flex justify-between items-center hover:text-primary transition-colors"
                                         onClick={() => setOpen(false)}
                                     >
-                                        <span className="text-lg">Contact Us</span>
+                                        <span className="text-lg">{t.nav.contact}</span>
                                         <MoveRight className="w-4 h-4 stroke-1 text-muted-foreground" />
                                     </Link>
                                     <a
@@ -204,7 +214,7 @@ export const Navbar = () => {
                                         className="flex justify-between items-center hover:text-primary transition-colors hover:pointer-events-auto"
                                         onClick={() => setOpen(false)}
                                     >
-                                        <span className="text-lg">Telegram</span>
+                                        <span className="text-lg">{t.nav.telegram}</span>
                                         <Send className="w-4 h-4 stroke-1 text-muted-foreground" />
                                     </a>
                                 </motion.div>
